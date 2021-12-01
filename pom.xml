@@ -12,9 +12,9 @@
     <name>Househunt</name>
     <description>Description for househunt</description>
 
-    <repositories>
-        <!-- jhipster-needle-maven-repository -->
-    </repositories>
+<!--    <repositories>-->
+<!--        &lt;!&ndash; jhipster-needle-maven-repository &ndash;&gt;-->
+<!--    </repositories>-->
 
     <pluginRepositories>
         <!-- jhipster-needle-maven-plugin-repository -->
@@ -86,6 +86,7 @@
         <properties-maven-plugin.version>1.0.0</properties-maven-plugin.version>
         <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
         <!-- jhipster-needle-maven-property -->
+        <common-libs.version>0.5.11</common-libs.version>
     </properties>
 
     <dependencyManagement>
@@ -342,6 +343,17 @@
             <artifactId>metrics-core</artifactId>
         </dependency>
         <!-- jhipster-needle-maven-add-dependency -->
+        <dependency>
+            <groupId>app.kyosk</groupId>
+            <artifactId>common-libs</artifactId>
+            <version>${common-libs.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -398,6 +410,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
@@ -621,7 +641,7 @@
                                 <arg>/entrypoint.sh</arg>
                             </entrypoint>
                             <ports>
-                                <port>8085</port>
+                                <port>8090</port>
                             </ports>
                             <environment>
                                 <SPRING_OUTPUT_ANSI_ENABLED>ALWAYS</SPRING_OUTPUT_ANSI_ENABLED>
@@ -1044,4 +1064,47 @@
         </profile>
         <!-- jhipster-needle-maven-add-profile -->
     </profiles>
+
+    <repositories>
+        <repository>
+            <id>nexus-central</id>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <url>https://nexus.kyosk.dev/repository/maven-central/</url>
+        </repository>
+        <repository>
+            <id>Kyosk-repos</id>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <url>https://nexus.kyosk.dev/repository/kyosk-libs/</url>
+        </repository>
+        <repository>
+            <id>Kyosk-repos-new</id>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <url>https://new-nexus.kyosk.dev/repository/kyosk-libs/</url>
+        </repository>
+        <repository>
+            <id>nexus-central-new</id>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <url>https://new-nexus.kyosk.dev/repository/maven-central/</url>
+        </repository>
+    </repositories>
 </project>

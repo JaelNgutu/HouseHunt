@@ -20,7 +20,7 @@
     "reactive": false,
     "authenticationType": "jwt",
     "packageName": "com.example.househunt",
-    "serverPort": "8085",
+    "serverPort": "8090",
     "cacheProvider": "caffeine",
     "enableHibernateCache": true,
     "databaseType": "sql",
