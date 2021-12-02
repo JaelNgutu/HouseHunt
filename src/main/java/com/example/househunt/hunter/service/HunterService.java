@@ -82,6 +82,7 @@ public class HunterService {
         return newHunter;
     }
 
+    @Transactional(readOnly = true)
     public void verifyAccount(String token) {
         Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
         verificationToken.orElseThrow(() -> new HouseHuntException("Invalid Token"));
@@ -96,7 +97,8 @@ public class HunterService {
             .orElseThrow(() -> new UsernameNotFoundException("User name not found - " + principal.getUsername()));
     }
 
-    private void fetchUserandActivate(VerificationToken verificationToken) {
+    @Transactional(readOnly = true)
+    public void fetchUserandActivate(VerificationToken verificationToken) {
         String username = verificationToken.getHunter().getUserName();
         Hunter hunter = hunterRepository
             .findByUserName(username)

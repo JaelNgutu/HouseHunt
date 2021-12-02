@@ -144,6 +144,8 @@ spring:
       auth: true
       starttls.enable: true
       ssl.trust: smtp.mailtrap.io
+  autoconfigure:
+    exclude: org.keycloak.adapters.springboot.KeycloakAutoConfiguration
 
 server:
   servlet:

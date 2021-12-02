@@ -18,8 +18,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private com.example.househunt.security.JwtProvider jwtProvider;
+    @Autowired
+    private JwtProvider jwtProvider;
 
+    @Autowired
     private UserDetailsService userDetailsService;
 
     @Override
