@@ -18,5 +18,4 @@ public class HouseDTO {
     Boolean status;
     Instant createdDate;
     String categoryName;
-    String userName;
 }

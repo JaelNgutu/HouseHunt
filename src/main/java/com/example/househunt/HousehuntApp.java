@@ -18,9 +18,11 @@ import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import tech.jhipster.config.DefaultProfileUtil;
 import tech.jhipster.config.JHipsterConstants;
 
+@EnableSwagger2
 @EnableAsync
 @SpringBootApplication
 @EnableJpaRepositories

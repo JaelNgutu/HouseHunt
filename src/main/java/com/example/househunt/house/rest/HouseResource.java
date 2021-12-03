@@ -4,29 +4,32 @@ import static org.springframework.http.ResponseEntity.status;
 
 import com.example.househunt.house.domain.House;
 import com.example.househunt.house.domain.HouseDTO;
+import com.example.househunt.house.query.HouseQueryService;
+import com.example.househunt.house.query.criteria.HouseCriteria;
 import com.example.househunt.house.services.HouseService;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import tech.jhipster.web.util.PaginationUtil;
 
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/houses")
 public class HouseResource {
 
-    private final HouseService houseService;
+    final HouseService houseService;
+    final HouseQueryService houseQueryService;
 
     @PostMapping("/add")
     public ResponseEntity<House> createHouseFromDTO(@RequestBody HouseDTO houseDTO) {
         var newHouse = houseService.createNewHouseAndSave(houseDTO);
         return ResponseEntity.ok(newHouse);
-    }
-
-    @GetMapping
-    public ResponseEntity<List<House>> getAllHouses() {
-        return status(HttpStatus.OK).body(houseService.getAllHouses());
     }
 
     @GetMapping("/{id}")
@@ -39,14 +42,11 @@ public class HouseResource {
     public ResponseEntity<House> updateHouse(@PathVariable Long id, @RequestBody HouseDTO houseDTO) {
         return status(HttpStatus.OK).body(houseService.updateHouse(id, houseDTO));
     }
-    /*  @GetMapping("by-category/{id}")
-    public ResponseEntity<List<HouseResponse>> getHousesByCategory(Long id) {
-        return status(HttpStatus.OK).body(houseService.getHousesByCategory(id));
+
+    @GetMapping("")
+    public ResponseEntity<List<House>> getHouses(HouseCriteria houseCriteria, Pageable page) {
+        Page<House> houses = houseQueryService.findByCriteria(houseCriteria, page);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequestUri(), houses);
+        return ResponseEntity.ok().headers(headers).body(houses.getContent());
     }
-
-    @GetMapping("by-user/{name}")
-    public ResponseEntity<List<HouseResponse>> getHouseByUsername(@PathVariable String name) {
-        return status(HttpStatus.OK).body(houseService.getHouseByUsername(name));
-    }*/
-
 }

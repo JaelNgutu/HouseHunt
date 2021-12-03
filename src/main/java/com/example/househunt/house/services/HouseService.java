@@ -30,25 +30,6 @@ public class HouseService {
         return houseRepository.findAll();
     }
 
-    /*
-    @Transactional(readOnly = true)
-    public List<HouseResponse> getHousesByCategory(Long id) {
-        Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new CategoryNotFoundException(id.toString()));
-        List<House> houses = houseRepository.findAllByCategory(category);
-        return houses.stream().map(houseMapper::mapToDto).collect(toList());
-    }*/
-
-    /*    @Transactional(readOnly = true)
-    public List<HouseResponse> getHouseByUsername(String username) {
-        Hunter hunter = hunterRepository.findByUserName(username)
-                .orElseThrow(() -> new UsernameNotFoundException(username));
-        return houseRepository.findByHunter(hunter)
-                .stream()
-                .map(houseMapper::mapToDto)
-                .collect(toList());
-    }*/
-
     public House findHouseById(Long id) {
         return houseRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("House with id {} not found"));
     }
