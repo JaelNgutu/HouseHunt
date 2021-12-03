@@ -44,9 +44,8 @@ public class HouseResource {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<House>> getHouses(HouseCriteria houseCriteria, Pageable page) {
-        Page<House> houses = houseQueryService.findByCriteria(houseCriteria, page);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequestUri(), houses);
-        return ResponseEntity.ok().headers(headers).body(houses.getContent());
+    public ResponseEntity<List<House>> getHouses(HouseCriteria houseCriteria) {
+        List<House> houses = houseQueryService.findByCriteria(houseCriteria);
+        return ResponseEntity.ok().body(houses);
     }
 }

@@ -20,7 +20,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class House extends AbstractEntity {
+public class House {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -67,21 +67,17 @@ public class House extends AbstractEntity {
     @Column(insertable = false, updatable = false, name = "categoryId")
     Long categoryId;
 
-    private void setCategoryId(Category category) {
-        this.category = category;
-        if (category != null) {
-            this.categoryId = category.getId();
-        }
-    }
-
-    private void setHunterId(Hunter hunter) {
+    public void setHunter(Hunter hunter) {
         this.hunter = hunter;
         if (hunter != null) {
             this.hunterId = hunter.getHunterId();
         }
     }
 
-    public void setHunter(Hunter currentUser) {}
-
-    public void setCategory(Category category) {}
+    public void setCategory(Category category) {
+        this.category = category;
+        if (category != null) {
+            this.categoryId = category.getId();
+        }
+    }
 }
