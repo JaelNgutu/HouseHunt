@@ -43,7 +43,7 @@ public class CategoryService {
     }
 
     public CategoryDTO getCategory(Long id) {
-        Category category = categoryRepository.findById(id).orElseThrow(() -> new HouseHuntException("No subreddit found with ID - " + id));
+        Category category = categoryRepository.findById(id).orElseThrow(() -> new HouseHuntException("No category found with ID - " + id));
         return categoryMapper.mapCategoryToDto(category);
     }
 }
