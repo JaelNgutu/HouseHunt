@@ -18,7 +18,7 @@ public class HunterResource {
     final HunterService hunterService;
 
     @PostMapping("/signup")
-    public ResponseEntity<Hunter> createDriverFromDto(@RequestBody HunterDTO hunterDTO) {
+    public ResponseEntity<Hunter> createHunterFromDto(@RequestBody HunterDTO hunterDTO) {
         var newHunter = hunterService.createNewHunterAndSave(hunterDTO);
         return ResponseEntity.ok(newHunter);
     }
